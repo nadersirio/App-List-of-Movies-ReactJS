@@ -14,13 +14,13 @@ const Movies = (props) => {
     return <ul className="listPosterCustom">
       { poster.map( (poster) => <a key = { poster.slug } href={`/movie/${poster.title}`}><li className='contentMovie'><img className="imgPosterCustom" src={`${poster.url}`} alt="Banner Movie"></img> { poster.title }</li></a> ) }
     </ul>
-    }
-    return (
-      <section className="App-body">
-        {rendering()}
-      </section>
-    )
   }
+  return (
+    <section className="App-body">
+      {rendering()}
+    </section>
+  )
+}
 
 
 

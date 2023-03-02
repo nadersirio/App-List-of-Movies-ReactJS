@@ -28,13 +28,13 @@ const App = () => {
     CallMovies()
   }, [])
 
-    useEffect(() => {
+  useEffect(() => {
       if(requisition) {
         setRequisition(false)
         const searchMovie = async () => {
           try {
             const getMovie = await axios.get(`http://localhost:3000/movie/${nameMovie}`)
-            setMovie(getMovie.data)
+            setMovie(getMovie.data.movie)
           } catch(err) {
             setMovie(false)
           }
@@ -55,6 +55,9 @@ const App = () => {
         <a href="/"><h1>Library of Movies</h1></a>
         <input onChange={valueSearchMovie} value={search} type="text" placeholder="Busque nossos filmes!"></input>
         <button name="searchButton" onClick={buttonSearch}>Search</button>
+        <div className='newMovieContent'>
+          <button name="newMovieRedirect"><a href="http://localhost:3001/new-movie">Add Movie</a></button>
+        </div>
       </section>
       { errorMsn ? (<h1> Library Empty </h1>) : ( <Movies poster={poster} movie={movie}/> ) }
     </div>

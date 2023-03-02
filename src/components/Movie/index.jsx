@@ -15,6 +15,10 @@ const Movie = () => {
     } getMovie();
   }, []);
 
+  const editMovie = async () => {
+    console.log("editar filme")
+  }
+
   const deleteMovie = async () => {
     try {
       await axios.delete(`http://localhost:3000/movie/${movieHash}`)
@@ -33,7 +37,7 @@ const Movie = () => {
       </div>
       <div className='alignButtons'>
         <button type="button"><a href="/">Home</a></button>
-        <button type="button"><a href="/">Edit</a></button>
+        <button type="button" onclick={editMovie}>Edit</button>
         <button type="button" onClick={deleteMovie}>Delete</button>
       </div>
     </section>

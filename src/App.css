@@ -1,0 +1,88 @@
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.content-father {
+  background-color: #646974;
+  height: 100vh;
+}
+
+.App-header {
+  background-color: #282c34;
+  height: 20vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.search-content {
+  align-self: flex-end;
+  font-size: 20px;
+  width: 20em;
+}
+
+.App-body {
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.listPosterCustom {
+  list-style: none;
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-evenly;
+}
+
+.contentMovie {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  font-size: 20px
+}
+
+.imgPosterCustom {
+  border-radius: 10px;
+  max-width: 250px;
+  min-width: 100px;
+  height: 350px
+}
+
+.imgCustom {
+  border-radius: 10px;
+  max-width: 400px;
+  min-width: 200px;
+}
+
+.AlignMoviePage {
+  font-size: 20px;
+  color: white;
+  margin: 10px
+}
+
+.alignButtons {
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  margin-left: 10px;
+  font-size: 15px;
+}
+
+a {
+  all: unset
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

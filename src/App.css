@@ -18,10 +18,15 @@
   align-items: center;
 }
 
-.newMovieContent {
+.ButtonsInteractivesContent {
   display: flex;
   align-self: flex-end;
   margin: 10px;
+}
+
+.ButtonStyle {
+  font-size: 18px;
+  margin-right: 5px;
 }
 
 .App-body {

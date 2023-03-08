@@ -4,7 +4,9 @@ import reportWebVitals from './reportWebVitals';
 import React from "react";
 import ReactDOM from "react-dom/client";
 import Movie from "./components/Movie";
-import NewMovie from './components/newMovie';
+import  { NewMovie } from './components/newMovie';
+import { User } from './components/user/user';
+import { Login } from './components/user/login';
 import {
   createBrowserRouter,
   createRoutesFromElements,
@@ -19,6 +21,8 @@ const router = createBrowserRouter(
       <Route path='/movie/:nameMovie' element={<Movie />} />
       <Route path='/new-movie' element={<NewMovie />} />
       <Route path='/new-movie/:id' element={<NewMovie />} />
+      <Route path='/user' element={<User />} />
+      <Route path='/login' element={<Login />} />
     </>
   )
 );

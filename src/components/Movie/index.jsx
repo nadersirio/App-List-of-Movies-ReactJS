@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
-import { useHref } from 'react-router-dom';
+import { useHref, Link } from 'react-router-dom';
 
 const Movie = () => {
   const [movie, setMovie] = useState([]);
@@ -33,7 +33,7 @@ const Movie = () => {
       </div>
       <div className='alignButtons'>
         <button type="button"><a href="/">Home</a></button>
-        <button type="button"><a href={`/new-movie/${movieHash}`}>Edit</a></button>
+        <button type="button"><Link to="/new-movie" state={{ id: `${movieHash}`, title: `${movie.title}`}}>Edit</Link></button>
         <button type="button" onClick={deleteMovie}>Delete</button>
       </div>
     </section>

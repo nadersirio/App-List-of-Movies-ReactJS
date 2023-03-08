@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
-import { useHref } from "react-router";
+import { useLocation } from "react-router";
 
 export const NewMovie = () => {
   const [titleMovie, setTitle] = useState('');
@@ -8,6 +8,7 @@ export const NewMovie = () => {
   const [bannerMovie, setBanner] = useState('');
   const [postMovie, setPost] = useState(false);
   const [errorMsg, setError] = useState('');
+  const [slugMovie, setSlug] = useState('');
 
   const setingTitle = event => {
     setTitle(event.target.value);
@@ -36,18 +37,34 @@ export const NewMovie = () => {
             title: titleMovie,
             url: bannerMovie,
             release: releaseMovie
-            }
+            }, slug: slugMovie
           })
           window.location = "/";
         } catch(error) {
-          setError(<h1>This movie already exists in our library</h1>);
+          if(error.response.status === 405) {
+            setError(<h1>This movie already exists in our library</h1>);
+          } if (error.response.status === 401) {
+            setError(<h1>That user not has been authorized</h1>);
+          }
         }
       }
       sendPost()
     }
   }, [postMovie])
 
-  //console.log(useHref().slice(11))
+  let state = useLocation().state;
+  useEffect(() => {
+    if(state) {
+      let nameMovie = state.title;
+      async function getMovie() {
+        const movie = await axios.get(`http://localhost:3000/movie/${nameMovie}`);
+        setTitle(movie.data.movie.title);
+        setRelease(movie.data.movie.release);
+        setBanner(movie.data.movie.url);
+        setSlug(state.id);
+      } getMovie();
+    }
+  }, []);
 
   return (
     <section className="content-father">
@@ -58,12 +75,10 @@ export const NewMovie = () => {
         <input name="TitleNewMovie" type="text" onChange={setingTitle} value={titleMovie} placeholder="Title Movie"></input><br />
         <input name="ReleaseNewMovie" type="number" onChange={setingRelease} value={releaseMovie} placeholder="Release Movie"></input><br />
         <input name="BannerNewMovie" type="text" onChange={setingBanner} value={bannerMovie} placeholder="PNG image Movie"></input><br />
-        <button type="button" onClick={sendPostData}>Create</button>
-        <button type="button"><a href="/">Return</a></button>
+        <button type="button" className="ButtonStyle" onClick={sendPostData}>Create</button>
+        <button type="button" className="ButtonStyle"><a href="/">Return</a></button>
       </form>
       {errorMsg}
     </section>
   )
 }
-
-export default NewMovie

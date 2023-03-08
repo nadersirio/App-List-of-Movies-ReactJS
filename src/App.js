@@ -54,9 +54,11 @@ const App = () => {
       <section className="App-header">
         <a href="/"><h1>Library of Movies</h1></a>
         <input onChange={valueSearchMovie} value={search} type="text" placeholder="Busque nossos filmes!"></input>
-        <button name="searchButton" onClick={buttonSearch}>Search</button>
-        <div className='newMovieContent'>
-          <button name="newMovieRedirect"><a href="http://localhost:3001/new-movie">Add Movie</a></button>
+        <button className='ButtonStyle' name="searchButton" onClick={buttonSearch}>Search</button>
+        <div className='ButtonsInteractivesContent'>
+          <button className='ButtonStyle' name="newMovieRedirect"><a href="http://localhost:3001/new-movie">Add Movie</a></button>
+          <button className='ButtonStyle' name="UserRegister"><a href="http://localhost:3001/user">Register</a></button>
+          <button className='ButtonStyle' name="UserLogin"><a href="http://localhost:3001/login">Login</a></button>
         </div>
       </section>
       { errorMsn ? (<h1> Library Empty </h1>) : ( <Movies poster={poster} movie={movie}/> ) }

@@ -1,11 +1,13 @@
 import React, { useEffect, useState } from 'react'
 import axios from 'axios'
 import { useHref, Link } from 'react-router-dom';
+import { useCookies } from 'react-cookie';
 
 const Movie = () => {
   const [movie, setMovie] = useState([]);
   const [movieHash, setHash] = useState([]);
   const [errorMsn, setError] = useState('')
+  const [cookies, setCookie] = useCookies(['user']);
   const urlPath = `http://localhost:3000${useHref()}`
 
   useEffect(() => {
@@ -22,17 +24,16 @@ const Movie = () => {
 
   const deleteMovie = async () => {
     try {
-      await axios.delete(`http://localhost:3000/movie/${movieHash}`)
+      await axios.delete(`http://localhost:3000/movie/${movieHash}/${cookies.user.account}`)
       window.location = "/"
     } catch(err) {
-      return setError(<h1>Not has been possible delete this movie</h1>)
+      return setError(<h1>Cannot delete this movie without a User.</h1>)
     }
   }
 
   return (
     <section className="content-father">
       <div className="App-header">
-        {errorMsn}
         <h1> { movie.title } </h1>
       </div>
       <div className='AlignMoviePage'>
@@ -44,6 +45,7 @@ const Movie = () => {
         <button type="button"><Link to="/new-movie" state={{ id: `${movieHash}`, title: `${movie.title}`}}>Edit</Link></button>
         <button type="button" onClick={deleteMovie}>Delete</button>
       </div>
+        {errorMsn}
     </section>
   )
 };

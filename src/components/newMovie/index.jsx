@@ -47,7 +47,7 @@ export const NewMovie = () => {
           if(error.response.status === 405) {
             setError(<h1>This movie already exists in our library</h1>);
           } if (error.response.status === 401) {
-            setError(<h1>That user not has been authorized</h1>);
+            setError(<h1>Only users can add movies.</h1>);
           }
         }
       }

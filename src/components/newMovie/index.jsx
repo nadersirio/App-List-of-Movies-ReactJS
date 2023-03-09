@@ -1,6 +1,7 @@
 import { useEffect, useState } from "react"
 import axios from 'axios'
 import { useLocation } from "react-router";
+import { useCookies } from 'react-cookie';
 
 export const NewMovie = () => {
   const [titleMovie, setTitle] = useState('');
@@ -9,6 +10,7 @@ export const NewMovie = () => {
   const [postMovie, setPost] = useState(false);
   const [errorMsg, setError] = useState('');
   const [slugMovie, setSlug] = useState('');
+  const [cookie, setCookies] = useCookies(['user']);
 
   const setingTitle = event => {
     setTitle(event.target.value);
@@ -37,7 +39,8 @@ export const NewMovie = () => {
             title: titleMovie,
             url: bannerMovie,
             release: releaseMovie
-            }, slug: slugMovie
+            }, slug: slugMovie,
+            cookies: cookie,
           })
           window.location = "/";
         } catch(error) {

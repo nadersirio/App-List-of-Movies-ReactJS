@@ -2,6 +2,7 @@ import './App.css';
 import React,  { useState, useEffect } from 'react'
 import Movies from './components/Movies';
 import axios from 'axios'
+import { useCookies } from 'react-cookie';
 
 const App = () => {
   const [search, setSearch] = useState("");
@@ -10,6 +11,7 @@ const App = () => {
   const [poster, setPoster] = useState([])
   const [errorMsn, setMsn] = useState(false);
   const [requisition, setRequisition] = useState(false);
+  const [cookies, setCookies, removeCookie] = useCookies(['user']);
 
 
   const valueSearchMovie = event => {
@@ -49,12 +51,18 @@ const App = () => {
     setRequisition(true)
   }
 
+  const deslogUser = () => {
+    removeCookie('user', { path: "/"});
+  }
+
   return (
     <div className="content-father">
       <section className="App-header">
         <a href="/"><h1>Library of Movies</h1></a>
         <input onChange={valueSearchMovie} value={search} type="text" placeholder="Busque nossos filmes!"></input>
         <button className='ButtonStyle' name="searchButton" onClick={buttonSearch}>Search</button>
+        { cookies.user ? (<p className='userStyle'> User Logged: {cookies.user.email}</p>) : ('')}
+        { cookies.user ? (<button className='userStyle' onClick={deslogUser}>Deslog</button>) : ('')}
         <div className='ButtonsInteractivesContent'>
           <button className='ButtonStyle' name="newMovieRedirect"><a href="http://localhost:3001/new-movie">Add Movie</a></button>
           <button className='ButtonStyle' name="UserRegister"><a href="http://localhost:3001/user">Register</a></button>
